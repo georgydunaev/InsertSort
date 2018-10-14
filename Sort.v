@@ -110,3 +110,22 @@ destruct (le_dec (S a) n).
 exact IHx.
 reflexivity.
 Defined.
+
+Theorem head_reduct xh xt (H:ord (xh :: xt) = true) : ord xt = true.
+Proof.
+simpl in H.
+destruct xt.
++ simpl. reflexivity.
++ destruct (le_dec xh n).
+  * exact H.
+  * inversion H.
+Defined.
+
+Theorem ord_then_fix x (H: (ord x)=true) : (s x)=x.
+Proof.
+induction x as [|a b].
++ simpl. reflexivity.
++ destruct b. 
+  * simpl. reflexivity.
+  * simpl in * |- *.
+Abort.
