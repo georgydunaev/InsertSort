@@ -127,5 +127,8 @@ induction x as [|a b].
 + simpl. reflexivity.
 + destruct b. 
   * simpl. reflexivity.
-  * simpl in * |- *.
+  * pose (D:= head_reduct _ _ H).
+    pose (M:= IHb D).
+(*simpl.
+ simpl in * |- *. *)
 Abort.
