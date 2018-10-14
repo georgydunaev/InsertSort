@@ -76,3 +76,37 @@ simpl.
 compute.*)
 Abort.
 
+
+Fixpoint ord (x : list nat) {struct x}: bool.
+Proof.
+refine (match x with
+        | [] => true
+        | xh::xt => _
+        end).
+refine (match xt with
+        | [] => true
+        | xth::xtt => _
+        end).
+pose (r:= le_dec xh xth).
+destruct r as [L|R].
++ exact (ord xt).
++ exact false.
+Defined.
+
+Theorem thmeq x : ord x = P x 0.
+Proof.
+induction x.
+simpl. reflexivity.
+simpl.
+induction a.
+simpl.
+destruct x.
+simpl. reflexivity.
+apply IHx.
+destruct x.
+simpl in * |- *. reflexivity.
+simpl in * |- *.
+destruct (le_dec (S a) n).
+exact IHx.
+reflexivity.
+Defined.
