@@ -121,14 +121,23 @@ destruct xt.
   * inversion H.
 Defined.
 
-Theorem ord_then_fix x (H: (ord x)=true) : (s x)=x.
+(*ins a (ins n (s b)) = a :: ins n (s b)*)
+
+Fixpoint ord_then_fix x (H: (ord x)=true) : (s x)=x.
 Proof.
 induction x as [|a b].
 + simpl. reflexivity.
-+ destruct b. 
++ destruct b.
   * simpl. reflexivity.
   * pose (D:= head_reduct _ _ H).
     pose (M:= IHb D).
+simpl.
+rewrite <- M.
+simpl.
+
+(*unfold ins at 1.
+unfold s.*)
+
 (*simpl.
  simpl in * |- *. *)
 Abort.
