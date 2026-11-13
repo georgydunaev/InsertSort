@@ -3,7 +3,7 @@
 **Repository:** `InsertSort`  
 **Assigned AI Model:** `opencode/nemotron-3.5-lightning-free`  
 **Harness:** `opencode`  
-**Status:** `OPEN` (Pending Autonomous Worker)  
+**Status:** `CLOSED` (Implemented in insert_sort.py and benchmark.py)  
 **Created:** `2026-10-27T21:35:28Z`  
 
 ## Task Description

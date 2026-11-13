@@ -3,7 +3,7 @@
 **Repository:** `InsertSort`  
 **Assigned AI Model:** `openrouter/free-qwen-coder-32b`  
 **Harness:** `botharness`  
-**Status:** `OPEN` (Pending Autonomous Worker)  
+**Status:** `CLOSED` (Implemented in benchmark.py)  
 **Created:** `2026-10-27T21:35:28Z`  
 
 ## Task Description

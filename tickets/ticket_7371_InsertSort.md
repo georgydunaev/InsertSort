@@ -3,7 +3,7 @@
 **Repository:** `InsertSort`  
 **Assigned AI Model:** `opencode/mimo-v2.6-flash-free`  
 **Harness:** `opencode`  
-**Status:** `OPEN` (Pending Autonomous Worker)  
+**Status:** `CLOSED` (Implemented in insert_sort.py and insert_sort.sml)  
 **Created:** `2026-10-27T21:35:28Z`  
 
 ## Task Description

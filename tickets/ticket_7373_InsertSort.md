@@ -3,7 +3,7 @@
 **Repository:** `InsertSort`  
 **Assigned AI Model:** `openrouter/nvidia/nemotron-3.5-lightning:free`  
 **Harness:** `botharness`  
-**Status:** `OPEN` (Pending Autonomous Worker)  
+**Status:** `CLOSED` (Implemented in benchmark.py and README.md)  
 **Created:** `2026-10-27T21:35:28Z`  
 
 ## Task Description

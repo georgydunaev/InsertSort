@@ -2,7 +2,7 @@
 
 **Project:** InsertSort
 **Importance:** 3/10
-**State:** opened
+**State:** closed (completed with comprehensive README.md theorem overview)
 **Target Model Tier:** Tier 2 / Tier 3 (Free Cloud / Small LLMs)
 **Labels:** user, simple-task, tier2-model, tier3-model, InsertSort
 

@@ -1,35 +1,47 @@
 #!/usr/bin/env python3
-"""Property-based and complexity tests for InsertSort (Sort.v)."""
+"""Property-based, complexity, and formal verification tests for InsertSort (Sort.v)."""
 
 import os
+import subprocess
 import unittest
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 
-def insert(x, xs, key=lambda v: v):
-    for i, elem in enumerate(xs):
-        if key(x) <= key(elem):
-            return xs[:i] + [x] + xs[i:]
-    return xs + [x]
-
-
-def insertion_sort(xs, key=lambda v: v):
-    res = []
-    for x in xs:
-        res = insert(x, res, key=key)
-    return res
-
-
-class TestInsertSort(unittest.TestCase):
+class TestInsertSortIntegration(unittest.TestCase):
     def test_coq_sort_v_exists(self):
         vfile = os.path.join(ROOT, "Sort.v")
         self.assertTrue(os.path.isfile(vfile))
         with open(vfile, encoding="utf-8") as f:
             content = f.read()
         self.assertIn("Fixpoint", content)
+        self.assertIn("sort_sorted", content)
+        self.assertIn("sort_perm", content)
+        self.assertIn("key_sort_stable", content)
+
+    def test_coq_compilation(self):
+        vfile = os.path.join(ROOT, "Sort.v")
+        cmd = ["coqc", vfile]
+        res = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
+        self.assertEqual(res.returncode, 0, f"coqc compilation failed: {res.stderr}\n{res.stdout}")
+
+    def test_sml_implementation_exists_and_runs(self):
+        smlfile = os.path.join(ROOT, "insert_sort.sml")
+        self.assertTrue(os.path.isfile(smlfile))
+        cmd = ["poly", "-q", "--use", smlfile]
+        res = subprocess.run(cmd, cwd=ROOT, input="", capture_output=True, text=True)
+        self.assertEqual(res.returncode, 0, f"PolyML execution failed: {res.stderr}\n{res.stdout}")
+        self.assertIn("All SML InsertSort tests passed successfully", res.stdout)
+
+    def test_python_doctests_pass(self):
+        pyfile = os.path.join(ROOT, "insert_sort.py")
+        cmd = ["python3", "-m", "doctest", pyfile]
+        res = subprocess.run(cmd, cwd=ROOT, capture_output=True, text=True)
+        self.assertEqual(res.returncode, 0, f"Doctest failed: {res.stderr}\n{res.stdout}")
 
     def test_sorted_and_permutation_invariants(self):
+        from insert_sort import insertion_sort
+
         samples = [
             [],
             [1],

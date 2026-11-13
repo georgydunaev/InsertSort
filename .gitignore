@@ -1,3 +1,9 @@
+# Coq compilation artifacts
+*.vo
+*.vos
+*.vok
+*.glob
+.*.aux
 
 # Python bytecode & cache
 __pycache__/

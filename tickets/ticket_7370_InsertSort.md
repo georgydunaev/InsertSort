@@ -3,7 +3,7 @@
 **Repository:** `InsertSort`  
 **Assigned AI Model:** `mistral/codestral-latest`  
 **Harness:** `botharness`  
-**Status:** `OPEN` (Pending Autonomous Worker)  
+**Status:** `CLOSED` (Implemented in tests/test_properties.py)  
 **Created:** `2026-10-27T21:35:28Z`  
 
 ## Task Description
