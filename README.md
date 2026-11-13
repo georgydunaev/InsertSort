@@ -41,9 +41,11 @@ All theorems in `Sort.v` are proved constructively without any axioms or admitte
 ## Repository Structure
 
 - `Sort.v`: Formal specification, correctness proofs, and code extraction in Coq.
+- `include/insert_sort.hpp`: Modern generic C++17 template header providing bidirectional and random-access insertion sort and binary insertion sort with custom comparators.
 - `insert_sort.sml`: Standard ML implementation (Poly/ML & CakeML compatible) with built-in invariant verification.
 - `insert_sort.py`: Python reference implementation with type annotations, docstrings, linear and binary insertion sort, custom key extraction, and reverse ordering.
 - `benchmark.py`: Empirical timing and operation count verification across sorted, reversed, and random inputs.
+- `tests/test_cpp_insert_sort.cpp`: Comprehensive modern C++ verification test suite covering edge cases, stability, iterator categories, and custom comparators.
 - `tests/test_insert_sort.py`: Unit tests for empty, single, duplicates, reverse, negative, floating-point, custom comparator, and stability.
 - `tests/test_properties.py`: Property-based invariant tests covering permutation preservation, sortedness, idempotence, extrema, and randomized stability.
 - `tests/test_insertsort.py`: Integration test suite verifying Coq compilation, SML execution, Python doctests, and invariant checks.
@@ -56,22 +58,33 @@ All theorems in `Sort.v` are proved constructively without any axioms or admitte
 coqc Sort.v
 ```
 
-### 2. Run Standard ML Verification (Poly/ML)
+### 2. Run Modern C++ Test Suite
+```bash
+g++ -std=c++17 -Wall -Wextra -Wpedantic -O2 -Iinclude tests/test_cpp_insert_sort.cpp -o tests/test_cpp_insert_sort
+./tests/test_cpp_insert_sort
+```
+
+### 3. Run Standard ML Verification (Poly/ML)
 ```bash
 poly -q --use insert_sort.sml < /dev/null
 ```
 
-### 3. Run Python Doctests
+### 4. Run Python Doctests
 ```bash
 python3 -m doctest insert_sort.py
 ```
 
-### 4. Run Full Unittest Suite
+### 5. Run Full Unittest Suite
 ```bash
 python3 -m unittest discover -s tests -p "test_*.py"
 ```
 
-### 5. Run Benchmarks
+### 6. Run Benchmarks
 ```bash
 python3 benchmark.py
+```
+
+### 7. Run Everything via Makefile
+```bash
+make test
 ```

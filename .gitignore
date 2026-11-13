@@ -10,3 +10,8 @@ __pycache__/
 *.py[cod]
 *.class
 .pytest_cache/
+
+# C++ binaries and build artifacts
+tests/test_cpp_insert_sort
+*.o
+
