@@ -1,6 +1,8 @@
 #ifndef INSERT_SORT_HPP
 #define INSERT_SORT_HPP
 
+#include "binary_insert_sort.hpp"
+
 #include <algorithm>
 #include <functional>
 #include <iterator>
@@ -52,43 +54,11 @@ void insertion_sort(Container& container, Compare comp = Compare{}) {
     insertion_sort(begin(container), end(container), comp);
 }
 
-/**
- * Binary insertion sort algorithm for random-access iterators.
- *
- * Employs binary search (std::upper_bound) to determine the target insertion
- * position in O(log n) comparisons per element, for a total of O(n log n) comparisons.
- * Shifting remains O(n^2) moves. Stable sort.
- */
-template <typename RandomIt, typename Compare = std::less<>>
-void binary_insertion_sort(RandomIt first, RandomIt last, Compare comp = Compare{}) {
-    if (first == last) {
-        return;
-    }
-
-    for (RandomIt cur = std::next(first); cur != last; ++cur) {
-        auto val = std::move(*cur);
-        RandomIt insert_pos = std::upper_bound(first, cur, val, comp);
-        for (RandomIt hole = cur; hole != insert_pos; --hole) {
-            *hole = std::move(*(hole - 1));
-        }
-        *insert_pos = std::move(val);
-    }
-}
-
-/**
- * Container overload for binary insertion sort.
- */
-template <typename Container, typename Compare = std::less<>>
-void binary_insertion_sort(Container& container, Compare comp = Compare{}) {
-    using std::begin;
-    using std::end;
-    binary_insertion_sort(begin(container), end(container), comp);
-}
-
 } // namespace insert_sort
 
 // Bring into global namespace for standard usage
 using insert_sort::insertion_sort;
 using insert_sort::binary_insertion_sort;
+using insert_sort::binary_insertion_sort_counted;
 
 #endif // INSERT_SORT_HPP

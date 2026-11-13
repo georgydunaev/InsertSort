@@ -17,6 +17,7 @@
  */
 
 #include "insert_sort.hpp"
+#include "binary_insert_sort.hpp"
 
 #include <algorithm>
 #include <chrono>
@@ -388,6 +389,35 @@ void run_all_tests() {
 
         ++g_passed_tests;
         std::cout << "[       OK ] Interface.ContainerOverloads" << "\n";
+    }
+
+    // 13. Binary Insertion Sort Comparison Count and Stability
+    {
+        std::cout << "[ RUN      ] BinaryInsertSort.ComparisonCountAndStability\n";
+        ++g_total_tests;
+
+        // Bounded comparison count on random sequence of size 100
+        std::vector<int> data(100);
+        std::iota(data.begin(), data.end(), 1);
+        std::mt19937 g(12345);
+        std::shuffle(data.begin(), data.end(), g);
+
+        std::size_t comparisons = binary_insertion_sort_counted(data);
+        EXPECT_TRUE(std::is_sorted(data.begin(), data.end()));
+        EXPECT_TRUE(comparisons <= 600);
+
+        // Stability test with duplicate keys
+        std::vector<StableElement> elements = {
+            {2, 0}, {1, 1}, {2, 2}, {1, 3}, {2, 4}, {3, 5}
+        };
+        binary_insertion_sort_counted(elements, StableKeyCompare{});
+        std::vector<StableElement> expected = {
+            {1, 1}, {1, 3}, {2, 0}, {2, 2}, {2, 4}, {3, 5}
+        };
+        EXPECT_EQ(elements, expected);
+
+        ++g_passed_tests;
+        std::cout << "[       OK ] BinaryInsertSort.ComparisonCountAndStability\n";
     }
 }
 
