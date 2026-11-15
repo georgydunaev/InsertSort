@@ -1,5 +1,7 @@
 # [InsertSort · Carte Blanche] Autonomous Audit, Documentation & Improvement in `InsertSort`
 
+**Status:** RESOLVED
+
 Explore `/botworkspace/InsertSort` with full carte-blanche autonomy: document its purpose and files in `README.md`, add a verification test or example, and create follow-up tickets in `/botworkspace/InsertSort/tickets/`.
 
 ---
